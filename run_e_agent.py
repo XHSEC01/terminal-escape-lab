@@ -7,19 +7,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import chat
 from agent.tool_echo import TOOLS, dispatch
 from render.render_ansi import render_bytes
+from render.fonts import load_font as _font
 from PIL import Image, ImageDraw, ImageFont
 
 LAB = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(LAB, "assets", "terminal-escape")
 os.makedirs(ASSETS, exist_ok=True)
-
-def _font(size):
-    for p in [r"C:\Windows\Fonts\consola.ttf", r"C:\Windows\Fonts\msyh.ttc"]:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            pass
-    return ImageFont.load_default()
 
 def _agent_run(system_prompt):
     messages = [

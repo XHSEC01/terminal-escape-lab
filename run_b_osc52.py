@@ -2,19 +2,12 @@
 import os, sys, base64
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from render.render_ansi import render_bytes
+from render.fonts import load_font as _font
 from PIL import Image, ImageDraw, ImageFont
 
 LAB = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(LAB, "assets", "terminal-escape")
 os.makedirs(ASSETS, exist_ok=True)
-
-def _font(size):
-    for p in [r"C:\Windows\Fonts\consola.ttf", r"C:\Windows\Fonts\msyh.ttc"]:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            pass
-    return ImageFont.load_default()
 
 def osc52(text, clip="c"):
     b64 = base64.b64encode(text.encode("utf-8")).decode("ascii")

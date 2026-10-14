@@ -2,19 +2,12 @@
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import chat_text
+from render.fonts import load_font as _font
 from PIL import Image, ImageDraw, ImageFont
 
 LAB = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(LAB, "assets", "terminal-escape")
 os.makedirs(ASSETS, exist_ok=True)
-
-def _font(size):
-    for p in [r"C:\Windows\Fonts\consola.ttf", r"C:\Windows\Fonts\msyh.ttc"]:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            pass
-    return ImageFont.load_default()
 
 PROMPTS = {
     "A1_direct": (
@@ -62,6 +55,12 @@ def run():
     print("[A] does model emit ESC? (glm-4-flash)")
     results = {}
     for name, p in PROMPTS.items():
+        bin_path = os.path.join(ASSETS, f"03-{name}.bin")
+        if os.path.exists(bin_path) and "--refresh" not in sys.argv:
+            results[name] = open(bin_path, "rb").read()
+            esc = results[name].count(b"\x1b")
+            print(f"  {name}: {len(results[name])} bytes, ESC={esc} (cached)")
+            continue
         try:
             txt = chat_text([{"role":"user","content":p}], temperature=0.9)
         except Exception as e:
@@ -69,7 +68,7 @@ def run():
         results[name] = txt.encode("utf-8", errors="replace")
         esc = results[name].count(b"\x1b")
         print(f"  {name}: {len(results[name])} bytes, ESC={esc}")
-        with open(os.path.join(ASSETS, f"03-{name}.bin"), "wb") as f:
+        with open(bin_path, "wb") as f:
             f.write(results[name])
 
     # 合成对照图

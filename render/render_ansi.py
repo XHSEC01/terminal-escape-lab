@@ -25,17 +25,10 @@ PALETTE = [
 BG = (30,30,38)
 FG = (220,220,228)
 
-def _font(size=18):
-    for p in [
-        r"C:\Windows\Fonts\consola.ttf",
-        r"C:\Windows\Fonts\cour.ttf",
-        r"C:\Windows\Fonts\msyh.ttc",
-    ]:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            continue
-    return ImageFont.load_default()
+try:
+    from render.fonts import load_font as _font
+except ImportError:
+    from fonts import load_font as _font
 
 # ---------- ANSI 解析 ----------
 ESC, CSI_RE = b"\x1b", re.compile(rb"\x1b\[([0-9;?]*)([ -/]*)([@-~])")
