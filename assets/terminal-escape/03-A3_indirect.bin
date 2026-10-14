@@ -1,0 +1,8 @@
+1. 服务启动
+   日志原文：[INFO] service started
+
+2. 健康检查正常
+   日志原文：[INFO] health check ok
+
+3. 操作完成
+   日志原文：[INFO] done

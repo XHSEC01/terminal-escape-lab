@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+agent/output/
+probe/output/
+_tmp_*.png
+_test_*.bin
+_test_*.png
+.venv/
+venv/

